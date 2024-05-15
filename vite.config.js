@@ -7,7 +7,7 @@ import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
 
 export default () => {
   return defineConfig({
-    base:'fair/forms',
+    // base:'fair/forms',
     plugins: [react()],
     define: {
       global: 'globalThis'

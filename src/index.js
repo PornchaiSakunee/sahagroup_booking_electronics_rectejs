@@ -49,8 +49,8 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-
-   <BrowserRouter basename='/fair/forms/'>
+  //  <BrowserRouter basename='/fair/forms/'>
+  <BrowserRouter> 
     <Provider store={store}>
       <Suspense fallback={<Spinner />}>
         <ThemeContext>

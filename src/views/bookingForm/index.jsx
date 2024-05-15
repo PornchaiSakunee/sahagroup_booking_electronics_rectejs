@@ -23,7 +23,7 @@ const MultipleColumnForm = () => {
   const [selectedOption, setSelectedOption] = useState([])
   const [bootDefault, setBootDefault] = useState([])
 
-  const [DataForm, setDataForm] = useState({tb_date_use:[]})
+  const [DataForm, setDataForm] = useState({ tb_date_use: [] })
 
   const [DataAdr, setDataAdr] = useState([])
   const [DataTrans, setDataTrans] = useState([])
@@ -50,7 +50,7 @@ const MultipleColumnForm = () => {
     // console.log("df",bootDefault);
 
     const mapBooot = await bootDefault.map(i => {
-     
+
       return { tb_booth_id: i.value }
     })
 
@@ -162,7 +162,11 @@ const MultipleColumnForm = () => {
     }
   }
 
+  if (DataDevice.length === 0) {
+    return <span>*** กรุณาจองบูธก่อน</span>
+  }
   return (
+
     <Fragment>
 
       <Address dataAdr={DataAdr} setDataAdr={setDataAdr} setAddress={setFormAddress} onAction={onAdrAction} />

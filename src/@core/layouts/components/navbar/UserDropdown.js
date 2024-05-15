@@ -92,7 +92,7 @@ const UserDropdown = () => {
         </DropdownItem> */}
         <DropdownItem tag={Link} to="https://sahagroup.com/fair/views/login.html">
           <Power size={14} className="me-75" />
-          <span className="align-middle">Logout</span>
+          <span className="align-middle">ออกจากระบบ</span>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>

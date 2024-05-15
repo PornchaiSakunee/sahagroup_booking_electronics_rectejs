@@ -1,5 +1,5 @@
 // ** React Imports
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useState, useEffect, Fragment } from 'react'
 
 // ** Table Columns
@@ -12,13 +12,9 @@ import DataTable from 'react-data-table-component'
 
 // ** Reactstrap Imports
 import { Button, Input, Row, Col, Card, UncontrolledTooltip } from 'reactstrap'
-
-import * as pdfFonts from "pdfmake/build/vfs_fonts"
-import * as pdfMake from "pdfmake/build/pdfmake"
-
-// import pdfMake from 'pdfmake/build/pdfmake'
+import * as pdfMake from 'pdfmake/build/pdfmake'
+import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { font } from '../../assets/fonts/THSarabun'
-// import pdfFonts from 'pdfmake/build/vfs_fonts'
 
 import _ from 'lodash'
 
@@ -322,24 +318,24 @@ const InvoiceList = () => {
   }
   async function printPDF(dataOrder) {
 
-    pdfMake.vfs = pdfFonts.pdfMake.vfs
-    window.pdfMake.vfs["THSarabunNew.ttf"] = font
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs
+    // window.pdfMake.vfs["THSarabunNew.ttf"] = font
 
     pdfMake.fonts = {
 
-      // Kanit Font
-      THSarabunNew: {
-        normal: 'THSarabunNew.ttf',
-        bold: 'THSarabunNew.ttf',
-        italics: 'THSarabunNew.ttf',
-        bolditalics: 'THSarabunNew.ttf'
-      }
-      // Roboto: {
-      //   normal: 'Roboto-Regular.ttf',
-      //   bold: 'Roboto-Medium.ttf',
-      //   italics: 'Roboto-Italic.ttf',
-      //   bolditalics: 'Roboto-MediumItalic.ttf'
+
+      // THSarabunNew: {
+      //   normal: 'THSarabunNew.ttf',
+      //   bold: 'THSarabunNew.ttf',
+      //   italics: 'THSarabunNew.ttf',
+      //   bolditalics: 'THSarabunNew.ttf'
       // }
+      THSarabunNew: {
+        normal: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew.ttf',
+        bold: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew Bold.ttf',
+        italics: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew Italic.ttf',
+        bolditalics: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew BoldItalic.ttf'
+      }
 
     }
 
@@ -778,7 +774,7 @@ const InvoiceList = () => {
 
     // console.log('dataOrderfair', dataOrderfair)
 
-    const filterData_ = dataOrderfair.filter(i => i.f_delete === status)
+    const filterData_ = _.chain(dataOrderfair).filter(i => i.f_delete === status).orderBy("id", "desc").value()
 
     // console.log('gggg', filterData_)
     await setDataListOrderTable(filterData_)
