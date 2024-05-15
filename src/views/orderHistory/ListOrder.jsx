@@ -773,12 +773,13 @@ const InvoiceList = () => {
     }
 
     // console.log('dataOrderfair', dataOrderfair)
+    const sortData = _.orderBy(dataOrderfair, "id", "desc")
 
-    const filterData_ = _.chain(dataOrderfair).filter(i => i.f_delete === status).orderBy("id", "desc").value()
+    const filterData_ = _.filter(sortData, i => i.f_delete === status)
 
     // console.log('gggg', filterData_)
-    await setDataListOrderTable(filterData_)
-    await setDataListOrder(dataOrderfair)
+    setDataListOrderTable(filterData_)
+    setDataListOrder(sortData)
   }
 
   useEffect(() => {
