@@ -35,22 +35,22 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import "@styles/react/libs/react-hot-toasts/react-hot-toasts.scss";
 
 // ** Core styles
-import "./@core/assets/fonts/feather/iconfont.css";
-import "./@core/scss/core.scss";
-import "./assets/scss/style.scss";
+import "./@core/assets/fonts/feather/iconfont.css"
+import "./@core/scss/core.scss"
+import "./assets/scss/style.scss"
 
 // ** Service Worker
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorker"
 
 // ** Lazy load app
-const LazyApp = lazy(() => import("./App"));
+const LazyApp = lazy(() => import("./App"))
 
-const container = document.getElementById("root");
-const root = createRoot(container);
+const container = document.getElementById("root")
+const root = createRoot(container)
 
 root.render(
   <BrowserRouter basename='/fair/forms/'>
- {/* <BrowserRouter> */}
+ {/* <BrowserRouter>  */}
     <Provider store={store}>
       <Suspense fallback={<Spinner />}>
         <ThemeContext>

@@ -77,8 +77,6 @@ const Address = ({ dataAdr, setDataAdr, setAddress, onAction }) => {
           <Row>
             {dataAdr.map((item, index) => (
               <Col md='6' sm='6' className='mb-1' key={index}>
-
-
                 <Card className='bg-transparent border-primary shadow-none' >
                   <CardBody>
                     <CardTitle tag='h4'>
@@ -89,7 +87,10 @@ const Address = ({ dataAdr, setDataAdr, setAddress, onAction }) => {
                     {/* <CardSubtitle className='text-muted mb-1'>Support card subtitle</CardSubtitle> */}
                     <CardText >
                       {item.full_address}
+
                     </CardText>
+                    <CardText >  <span>ชื่อผู้ติดต่อ : {item.contact_name}</span> <br /><span>เบอร์โทรผู้ติดต่อ : {item.contact_number}</span></CardText>
+
                     <CardLink href='javascript:void(0);' onClick={() => onUpdateAdr(item)}>
                       แก้ไข
                     </CardLink>

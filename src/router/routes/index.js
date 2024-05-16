@@ -35,6 +35,7 @@ const Error = lazy(() => import("../../views/Error"))
 const OrderHistory = lazy(() => import("../../views/orderHistory"))
 const Booking = lazy(() => import("../../views/booking"))
 const BookingForm = lazy(() => import("../../views/bookingForm/index"))
+const AddToTrans = lazy(() => import("../../views/admin/manage/AddToTrans"))
 
 // ** Merge Routes
 const Routes = [
@@ -59,6 +60,10 @@ const Routes = [
     path: "/BookingForm/:masterId/:id",
     element: <BookingForm />
   },
+  // {
+  //   path: "/addToTrans/",
+  //   element: <AddToTrans />
+  // },
   {
     path: "/login",
     element: <Login />,

@@ -56,6 +56,8 @@ const MultipleColumnForm = () => {
 
     let equest_equipment = []
 
+    let numAllDevice = 0
+
     for (let index = 0; index < DataDevice.length; index++) {
       const itemD = DataDevice[index]
 
@@ -67,6 +69,9 @@ const MultipleColumnForm = () => {
         tb_equipment_fair_id: itemD.id,
         tb_date_use_id: i.id
       }))
+
+      const totalNumDevice = filterData.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.num), 0)
+      numAllDevice = numAllDevice + totalNumDevice
 
       equest_equipment = [...equest_equipment, ...itemInDay]
     }
@@ -84,24 +89,31 @@ const MultipleColumnForm = () => {
       }
     }
 
-    if (FormAddress === null) {
-      alert('กรุณาเลือกที่อยู่ในการเปิดบิล')
-    }
+    // "tentsAmt": "1.0",
+    // "stockAmt": "0.0",
+    // "stockAmtBitec": "0.0",
 
-    //  else if (mapBooot.length === 0) {
-    //   alert('กรุณาเลือกบูธ')
-    // }
-    else if (equest_equipment.length === 0) {
+    const tentsAmt = parseInt(DataTrans.sahagroupfair_trans[0].tentsAmt)
+    const stockAmt = parseInt(DataTrans.sahagroupfair_trans[0].stockAmt)
+    const stockAmtBitec = parseInt(DataTrans.sahagroupfair_trans[0].stockAmtBitec)
+
+    const totalBuootBooking = tentsAmt + stockAmt + stockAmtBitec
+    // console.log("nnnn", totalBuootBooking, numAllDevice, DataForm.f_type);
+    if (FormAddress === null) {
+      alert(`กรุณาเลือกที่อยู่ในการเปิดบิล`)
+    } else if (numAllDevice > totalBuootBooking && DataForm.f_type === "BOOTHCOUNT") {
+      alert(`ไม่สามารถจองเกินจำนวน ${totalBuootBooking} บูธได้`)
+    } else if (equest_equipment.length === 0) {
       alert('กรุณากรอก จำนวนอุปกรณ์อย่างน้อย 1 รายการ')
     } else {
       if (confirm('ยืนยันการจองอุปกรณ์')) {
         console.log('formData', formData)
 
-        const addFormData = await AddForm(formData, id)
+        // const addFormData = await AddForm(formData, id)
 
-        if (addFormData.status) {
-          navigate('/order-history')
-        }
+        // if (addFormData.status) {
+        //   navigate('/order-history')
+        // }
       }
     }
   }
@@ -118,6 +130,8 @@ const MultipleColumnForm = () => {
     setDataTrans(dataTrans_)
 
     const databoot_ = dataTrans_.sahagroupfair_trans[0].tb_booth.map(i => ({ value: i.id, label: i.boothname }))
+
+
 
     // console.log('databoot_', databoot_)
 

@@ -37,7 +37,31 @@ import { getProvinces, getAmphures, getDistricts, insertAddress, updateAddress }
 import { yupResolver } from '@hookform/resolvers/yup'
 
 const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) => {
+
+
     const SignupSchema = yup.object().shape({
+
+        contact_name: yup.string().required("กรุณากรอกชื่อผู่ติดต่อ"),
+        // contact_number: yup.string().required("กรุณากรอกเบอร์โทรศัพท์ผู้ติดต่อ"),
+        contact_number: yup.string()
+            .min(9, "กรุณาระบุอย่างน้อย 9 ตัวอักษร")
+            .max(10, "กรุณาระบุไม่เกิน 10 ตัวอักษร")
+            .test({
+                skipAbsent: true,
+                test(value, ctx) {
+                    function IsPhone(input) {
+                        const RE = /([0]{1,1}[0-9]{8,10})+/g
+                        return RE.test(input)
+                    }
+                    if (!IsPhone(value)) {
+                        return ctx.createError({
+                            message: "รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง"
+                        })
+                    }
+                    return true
+                }
+            }),
+
         address: yup.string().required("กรุณากรอกที่อยู่"),
         provinces: yup.string().required("กรุณาเลือกจังหวัด"),
         amphures: yup.string().required("กรุณาเลือกอำเภอ/เขต"),
@@ -107,6 +131,8 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
     const onSubmit = async (data) => {
         console.log("data", data)
         const dataAdd = {
+            contact_name: data.contact_name,
+            contact_number: data.contact_number,
             address: data.address,
             districts_id: data.districts,
             zip_code: data.zipCode
@@ -173,6 +199,8 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
                 // eslint-disable-next-line no-use-before-define
                 await DistrictsSet(ampID)
 
+                setValue("contact_name", dataUpdate.contact_name)
+                setValue("contact_number", dataUpdate.contact_number)
                 setValue("address", dataUpdate.address)
                 setValue("provinces", pvID)
                 setValue("amphures", ampID)
@@ -232,7 +260,7 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
     return (
         <Fragment>
             <Button color='primary' onClick={() => setShow(true)}>
-                เพิ่มที่อยู่
+                เพิ่มที่อยู่ปิดบิลและผู้ติดต่อ
             </Button>
             <Modal
                 isOpen={show}
@@ -242,10 +270,42 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
             >
                 <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 <ModalBody className='pb-5 px-sm-4 mx-50'>
-                    <h1 className='address-title text-center mb-1'>{dataUpdate ? 'แก้ไขที่อยู่' : 'เพิ่มที่อยู่'}</h1>
+                    <h1 className='address-title text-center mb-1'>{dataUpdate ? 'แก้ไขที่อยู่ปิดบิลและผู้ติดต่อ' : 'เพิ่มที่อยู่ปิดบิลและผู้ติดต่อ'}</h1>
                     {/* <p className='address-subtitle text-center mb-2 pb-75'>Add address for billing address</p> */}
                     <Row tag='form' className='gy-1 gx-2' onSubmit={handleSubmit(onSubmit)}>
 
+                        <Col xs={12} md={6}>
+                            <Label className='form-label' for='contact_name'>
+                                ชื่อผู้ติดต่อ <span style={{ color: 'red' }}>*</span>
+                            </Label>
+                            <Controller
+                                name='contact_name'
+                                control={control}
+                                invalid={errors.contact_name && true}
+                                render={({ field }) => (
+                                    <Input {...field} placeholder='กรอกชื่อผู้ติดต่อ' className={classnames({
+                                        "is-invalid": errors.contact_name
+                                    })} />
+                                )}
+                            />
+                            {errors.contact_name && <FormFeedback>{errors.contact_name.message}</FormFeedback>}
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <Label className='form-label' for='contact_number'>
+                                เบอร์โทรผู้ติดต่อ <span style={{ color: 'red' }}>*</span>
+                            </Label>
+                            <Controller
+                                name='contact_number'
+                                control={control}
+                                invalid={errors.contact_number && true}
+                                render={({ field }) => (
+                                    <Input {...field} placeholder='กรอกเบอร์โทรผู้ติดต่อ' className={classnames({
+                                        "is-invalid": errors.contact_number
+                                    })} />
+                                )}
+                            />
+                            {errors.contact_number && <FormFeedback>{errors.contact_number.message}</FormFeedback>}
+                        </Col>
                         <Col xs={12} md={12}>
                             <Label className='form-label' for='address'>
                                 ที่อยู่ <span style={{ color: 'red' }}>*</span>
@@ -253,12 +313,14 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
                             <Controller
                                 name='address'
                                 control={control}
-
+                                invalid={errors.address && true}
                                 render={({ field }) => (
-                                    <Input {...field} placeholder='กรอกที่อยู่' />
+                                    <Input {...field} placeholder='กรอกที่อยู่' className={classnames({
+                                        "is-invalid": errors.address
+                                    })} />
                                 )}
                             />
-                            {errors.address && <FormFeedback>กรุณณา กรอกที่อยู่</FormFeedback>}
+                            {errors.address && <FormFeedback>{errors.address.message}</FormFeedback>}
                         </Col>
 
                         <Col xs={12} sm={6}>
@@ -300,7 +362,7 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
                                     // />
                                 )}
                             />
-                            {errors.tree_name_id && <FormFeedback>{errors.tree_name_id.message}</FormFeedback>}
+                            {errors.provinces && <FormFeedback>{errors.provinces.message}</FormFeedback>}
 
                         </Col>
                         <Col xs={12} sm={6}>
@@ -343,7 +405,7 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
                                     // />
                                 )}
                             />
-                            {errors.tree_name_id && <FormFeedback>{errors.tree_name_id.message}</FormFeedback>}
+                            {errors.amphures && <FormFeedback>{errors.amphures.message}</FormFeedback>}
                             {/* <Select
                                 id='amphures'
                                 isClearable={false}
@@ -411,10 +473,12 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
                                 control={control}
                                 invalid={errors.zipCode && true}
                                 render={({ field }) => (
-                                    <Input  {...field} placeholder='กรอกรหัสไปรษณ์ย์' />
+                                    <Input  {...field} placeholder='กรอกรหัสไปรษณ์ย์' className={classnames({
+                                        "is-invalid": errors.districts
+                                    })} />
                                 )}
                             />
-                            {errors.zipCode && <FormFeedback>กรุณากรอก รหัสไปรษณ์ย์</FormFeedback>}
+                            {errors.zipCode && <FormFeedback>{errors.zipCode.message}</FormFeedback>}
                         </Col>
 
                         <Col className='text-center' xs={12}>

@@ -46,6 +46,7 @@ const ViewOrderList = ({ data }) => {
                         <h6 className='mb-2'>ที่อยู่เปิดบิล:</h6>
                         <h6 className='mb-25'>{data.address_open.user.customer.cus_company}</h6>
                         <CardText className='mb-25'>{data.address_open.full_address}</CardText>
+                        <CardText className='mb-25'> <span>ชื่อผู้ติดต่อ : {data.address_open.contact_name}</span> <br /><span>เบอร์โทรผู้ติดต่อ : {data.address_open.contact_number}</span></CardText>
                         {/* <CardText className='mb-25'>{data.invoice.client.address}</CardText>
             <CardText className='mb-25'>{data.invoice.client.contact}</CardText>
             <CardText className='mb-0'>{data.invoice.client.companyEmail}</CardText> */}

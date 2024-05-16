@@ -463,7 +463,30 @@ const InvoiceList = () => {
             }
           ]
         },
-
+        {
+          text: [
+            {
+              text: `ชื่อผู้ติดต่อ : `,
+              style: 'subtitle'
+            },
+            {
+              text: dataOrder.address_open.contact_name,
+              fontSize: 14
+            }
+          ]
+        },
+        {
+          text: [
+            {
+              text: `เบอร์โทรผู้ติดต่อ : `,
+              style: 'subtitle'
+            },
+            {
+              text: dataOrder.address_open.contact_number,
+              fontSize: 14
+            }
+          ]
+        },
         {
           text: [
             {

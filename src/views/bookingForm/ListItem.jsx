@@ -39,8 +39,8 @@ const ListBooking = ({ itemDevice, tbHead, setitemdevice, setFooter }) => {
     async function sumAll() {
       const sumSubtotal = await fucSubTotal()
       const sub_vat = (sumSubtotal * 1.07) - sumSubtotal
-      const total = sumSubtotal * 1.07
       const sub_withholding_tax = sumSubtotal >= 1000 ? (sumSubtotal * 1.03) - sumSubtotal : 0
+      const total = (sumSubtotal * 1.07) + sub_withholding_tax
 
       await setSubTotal(sumSubtotal)
       await setvatTotal(sub_vat)
@@ -153,7 +153,7 @@ const ListBooking = ({ itemDevice, tbHead, setitemdevice, setFooter }) => {
               </td>
               <td>
                 {row.tb_equipment.eq_name}<br />
-                <small style={{color:"red"}}>{row.tb_equipment.eq_detail}</small>
+                <small style={{ color: "red" }}>{row.tb_equipment.eq_detail}</small>
               </td>
               {/* <td>
                 <Typography color='text.primary'>{row.tb_equipment.eq_detail}</Typography>

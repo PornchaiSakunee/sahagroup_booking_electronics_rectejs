@@ -1,4 +1,4 @@
-import { FileText, RefreshCcw  } from "react-feather"
+import { FileText, RefreshCcw, Circle } from "react-feather"
 
 export default [
   {
@@ -13,4 +13,11 @@ export default [
     icon: <FileText size={20} />,
     navLink: "/booking"
   }
+  // {
+  //   id: "addToTrans",
+  //   title: "ผู้ดูแลระบบ",
+  //   icon: <FileText size={20} />,
+  //   navLink: "/addToTrans"
+  // }
+  
 ]
