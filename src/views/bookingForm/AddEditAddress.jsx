@@ -260,7 +260,7 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
     return (
         <Fragment>
             <Button color='primary' onClick={() => setShow(true)}>
-                เพิ่มที่อยู่ปิดบิลและผู้ติดต่อ
+                เพิ่มที่อยู่เปิดบิลและผู้ติดต่อ
             </Button>
             <Modal
                 isOpen={show}
@@ -270,7 +270,7 @@ const AddEditAddress = ({ show, setShow, onAction, dataUpdate, setDataUpdate }) 
             >
                 <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 <ModalBody className='pb-5 px-sm-4 mx-50'>
-                    <h1 className='address-title text-center mb-1'>{dataUpdate ? 'แก้ไขที่อยู่ปิดบิลและผู้ติดต่อ' : 'เพิ่มที่อยู่ปิดบิลและผู้ติดต่อ'}</h1>
+                    <h1 className='address-title text-center mb-1'>{dataUpdate ? 'แก้ไขที่อยู่เปิดบิลและผู้ติดต่อ' : 'เพิ่มที่อยู่เปิดบิลและผู้ติดต่อ'}</h1>
                     {/* <p className='address-subtitle text-center mb-2 pb-75'>Add address for billing address</p> */}
                     <Row tag='form' className='gy-1 gx-2' onSubmit={handleSubmit(onSubmit)}>
 
