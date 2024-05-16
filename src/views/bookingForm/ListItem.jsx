@@ -152,7 +152,8 @@ const ListBooking = ({ itemDevice, tbHead, setitemdevice, setFooter }) => {
                 <img alt='iPhone 11 Pro' src={row.tb_equipment.eq_photo} height={80} />
               </td>
               <td>
-                {row.tb_equipment.eq_name}
+                {row.tb_equipment.eq_name}<br />
+                <small style={{color:"red"}}>{row.tb_equipment.eq_detail}</small>
               </td>
               {/* <td>
                 <Typography color='text.primary'>{row.tb_equipment.eq_detail}</Typography>
