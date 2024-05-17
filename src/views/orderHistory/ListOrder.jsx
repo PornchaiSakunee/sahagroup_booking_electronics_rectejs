@@ -336,6 +336,12 @@ const InvoiceList = () => {
         italics: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew Italic.ttf',
         bolditalics: 'https://sahagroup.com/fair/forms/THSarabun/THSarabunNew BoldItalic.ttf'
       }
+      // THSarabunNew: {
+      //   normal: '../../@core/assets/fonts/THSarabun/THSarabunNew.ttf',
+      //   bold: '../../@core/assets/fonts/THSarabun/THSarabunNew Bold.ttf',
+      //   italics: '../../@core/assets/fonts/THSarabun/THSarabun/THSarabunNew Italic.ttf',
+      //   bolditalics: '../../@core/assets/fonts/THSarabun/THSarabun/THSarabunNew BoldItalic.ttf'
+      // }
 
     }
 

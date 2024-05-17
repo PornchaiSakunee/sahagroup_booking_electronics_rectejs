@@ -107,13 +107,13 @@ const MultipleColumnForm = () => {
       alert('กรุณากรอก จำนวนอุปกรณ์อย่างน้อย 1 รายการ')
     } else {
       if (confirm('ยืนยันการจองอุปกรณ์')) {
-        console.log('formData', formData)
+        // console.log('formData', formData)
 
-        // const addFormData = await AddForm(formData, id)
+        const addFormData = await AddForm(formData, id)
 
-        // if (addFormData.status) {
-        //   navigate('/order-history')
-        // }
+        if (addFormData.status) {
+          navigate('/order-history')
+        }
       }
     }
   }
